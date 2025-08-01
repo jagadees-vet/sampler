@@ -27,3 +27,34 @@ export default tseslint.config(
     },
   }
 );
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+
+const firebaseConfig = {
+  // your config here
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// To create a new user:
+createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed up successfully
+    const user = userCredential.user;
+    console.log("User created:", user);
+  })
+  .catch((error) => {
+    console.error(error.code, error.message);
+  });
+
+// To sign in an existing user:
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in successfully
+    const user = userCredential.user;
+    console.log("User signed in:", user);
+  })
+  .catch((error) => {
+    console.error(error.code, error.message);
+  });
